@@ -13,7 +13,7 @@ module.exports.pitch = function (remainingRequest) {
   }
 
   var result = [
-    'var Promise = require(' + JSON.stringify(require.resolve(promiseLib)) + ');\n',
+    'var Promise = require(' + JSON.stringify(promiseLib) + ');\n',
     'module.exports = function () {\n',
     '  return new Promise(function (resolve) {\n',
     '    require.ensure([], function (require) {\n',
@@ -25,4 +25,3 @@ module.exports.pitch = function (remainingRequest) {
 
   return result.join('');
 };
-module.exports.separable = true;
