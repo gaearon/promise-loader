@@ -1,11 +1,13 @@
-# bundle loader for webpack with promise API
+## A sister of [bundle-loader](https://github.com/webpack/bundle-loader) with promise API
 
-## Usage
+### Usage
 
 [Documentation: Using loaders](http://webpack.github.io/docs/using-loaders.html)
 
 This is a ripoff of [bundle-loader](https://github.com/webpack/bundle-loader) that uses promises instead of callbacks.
-It only supports what is `lazy` mode in `bundle-loader`—that is, `require` returns a function that, when invoked, returns a promise that resolves to the module.
+It only implements so-called `lazy` `bundle-loader` mode—that is, `require` returns a function that, when invoked, returns a promise that resolves to the module.
+
+`require: (string) -> () -> Promise<module>`
 
 It's up to you to specify your Promise library of choice as a parameter.
 
@@ -19,7 +21,7 @@ load().then(function(file) {
 });
 ```
 
-## License
+### License
 
 MIT (http://www.opensource.org/licenses/mit-license.php)
 
