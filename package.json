@@ -1,0 +1,18 @@
+{
+  "name": "promise-loader",
+  "version": "0.1.0",
+  "author": {
+    "name": "Dan Abramov"
+  },
+  "description": "a webpack bundle-loader ripoff with promise interface",
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/gaearon/promise-loader.git"
+  },
+  "licenses": [
+    {
+      "type": "MIT",
+      "url": "http://www.opensource.org/licenses/mit-license.php"
+    }
+  ]
+}
