@@ -21,6 +21,14 @@ load().then(function(file) {
 });
 ```
 
+You can optionally specify [a name for your chunk](http://webpack.github.io/docs/code-splitting.html#named-chunks) after a comma:
+
+```javascript
+var load = require("promise?bluebird,editor!./editor.js");
+```
+
+This can be useful for [single-page apps](http://webpack.github.io/docs/optimization.html#single-page-app) because you can later extract filenames from [Webpack-generated stats](https://github.com/webpack/docs/wiki/node.js-api#stats) and pre-load specific bundles if you know user's going to hit them.
+
 ### License
 
 MIT (http://www.opensource.org/licenses/mit-license.php)

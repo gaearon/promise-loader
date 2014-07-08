@@ -7,7 +7,10 @@
 module.exports = function () {};
 module.exports.pitch = function (remainingRequest) {
   this.cacheable && this.cacheable();
-  var promiseLib = this.query.substring(1);
+  var query = this.query.substring(1).split(','),
+      promiseLib = query[0],
+      bundleName = query[1] || '';
+
   if (!promiseLib) {
     throw new Error('You need to specify your Promise library of choice, e.g. require("promise?bluebird!./file.js")');
   }
@@ -18,7 +21,7 @@ module.exports.pitch = function (remainingRequest) {
     '  return new Promise(function (resolve) {\n',
     '    require.ensure([], function (require) {\n',
     '      resolve(require(', JSON.stringify('!!' + remainingRequest), '));\n',
-    '    });\n',
+    '    }' + (bundleName && (', ' + JSON.stringify(bundleName))) + ');\n',
     '  });\n',
     '}'
   ];
