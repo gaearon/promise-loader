@@ -21,6 +21,9 @@ load().then(function(file) {
 });
 ```
 
+If a promise library is already loaded externally you can specify 'global'.  
+
+
 You can optionally specify [a name for your chunk](http://webpack.github.io/docs/code-splitting.html#named-chunks) after a comma:
 
 ```javascript
