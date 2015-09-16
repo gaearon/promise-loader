@@ -4,23 +4,24 @@
  Shamelessly based on bundle-loader by Tobias Koppers @sokra
  */
 
+ var path = require('path');
+
 module.exports = function () {};
 module.exports.pitch = function (remainingRequest) {
   this.cacheable && this.cacheable();
   var query = this.query.substring(1).split(','),
     promiseLib = query[0],
     bundleName = query[1] || '';
-  var fileName = remainingRequest.match(/\/([^\/]+)$/)[1];
-  var name = fileName.split('.')[0];
+  var file = path.parse(remainingRequest);
   
-  bundleName = bundleName.replace(/\[fileName\]/g, fileName).replace(/\[name\]/g, name);
+  bundleName = bundleName.replace(/\[filename\]/g, file.base).replace(/\[name\]/g, file.name);
 
   if (!promiseLib) {
     throw new Error('You need to specify your Promise library of choice, e.g. require("promise?bluebird!./file.js")');
   }
 
   var result = [
-    (promiseLib !== "global") ? 'var Promise = require(' + JSON.stringify(promiseLib) + ');\n' : '',
+    (promiseLib !== 'global') ? 'var Promise = require(' + JSON.stringify(promiseLib) + ');\n' : '',
     'module.exports = function () {\n',
     '  return new Promise(function (resolve) {\n',
     '    require.ensure([], function (require) {\n',
