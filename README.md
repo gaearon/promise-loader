@@ -32,6 +32,15 @@ var load = require("promise?bluebird,editor!./editor.js");
 
 This can be useful for [single-page apps](http://webpack.github.io/docs/optimization.html#single-page-app) because you can later extract filenames from [Webpack-generated stats](https://github.com/webpack/docs/wiki/node.js-api#stats) and pre-load specific bundles if you know user's going to hit them.
 
+The bundle name may include `[filename]`, which will be replaced with the filename, and `[name]`, which omits the extension. This is useful for when you want to configure loaders in Webpack configuration without specifying precise filenames—for example, by a suffix:
+
+```javascript
+{
+  test: /\.i18n\.json$/,
+  loader: 'promise?global,[name].i18n'
+}
+```
+
 ### License
 
 MIT (http://www.opensource.org/licenses/mit-license.php)
