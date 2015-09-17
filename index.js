@@ -12,9 +12,10 @@ module.exports.pitch = function (remainingRequest) {
   var query = this.query.substring(1).split(','),
     promiseLib = query[0],
     bundleName = query[1] || '';
-  var file = path.parse(remainingRequest);
+  var filename = path.basename(remainingRequest);
+  var name = path.basename(remainingRequest, path.extname(filename));
   
-  bundleName = bundleName.replace(/\[filename\]/g, file.base).replace(/\[name\]/g, file.name);
+  bundleName = bundleName.replace(/\[filename\]/g, filename).replace(/\[name\]/g, name);
 
   if (!promiseLib) {
     throw new Error('You need to specify your Promise library of choice, e.g. require("promise?bluebird!./file.js")');
