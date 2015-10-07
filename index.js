@@ -17,12 +17,8 @@ module.exports.pitch = function (remainingRequest) {
   
   bundleName = bundleName.replace(/\[filename\]/g, filename).replace(/\[name\]/g, name);
 
-  if (!promiseLib) {
-    throw new Error('You need to specify your Promise library of choice, e.g. require("promise?bluebird!./file.js")');
-  }
-
   var result = [
-    (promiseLib !== 'global') ? 'var Promise = require(' + JSON.stringify(promiseLib) + ');\n' : '',
+    (promiseLib && promiseLib !== 'global') ? 'var Promise = require(' + JSON.stringify(promiseLib) + ');\n' : '',
     'module.exports = function () {\n',
     '  return new Promise(function (resolve) {\n',
     '    require.ensure([], function (require) {\n',
