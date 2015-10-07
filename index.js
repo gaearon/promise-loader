@@ -18,7 +18,7 @@ module.exports.pitch = function (remainingRequest) {
   bundleName = bundleName.replace(/\[filename\]/g, filename).replace(/\[name\]/g, name);
 
   var result = [
-    (promiseLib !== 'global') ? 'var Promise = require(' + JSON.stringify(promiseLib) + ');\n' : '',
+    (promiseLib && promiseLib !== 'global') ? 'var Promise = require(' + JSON.stringify(promiseLib) + ');\n' : '',
     'module.exports = function () {\n',
     '  return new Promise(function (resolve) {\n',
     '    require.ensure([], function (require) {\n',
