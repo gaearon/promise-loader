@@ -23,10 +23,14 @@ module.exports.pitch = function (remainingRequest) {
 
   var result = [
     (promiseLib !== 'global') ? 'var Promise = require(' + JSON.stringify(promiseLib) + ');\n' : '',
-    'module.exports = function () {\n',
+    'module.exports = function (namespace) {\n',
     '  return new Promise(function (resolve) {\n',
     '    require.ensure([], function (require) {\n',
-    '      resolve(require(', JSON.stringify('!!' + remainingRequest), '));\n',
+    '      if (namespace) {\n',
+    '        resolve(require(', JSON.stringify('!!' + remainingRequest), ')[namespace]);\n',
+    '      } else {\n',
+    '        resolve(require(', JSON.stringify('!!' + remainingRequest), '));\n',
+    '      }\n',
     '    }' + (bundleName && (', ' + JSON.stringify(bundleName))) + ');\n',
     '  });\n',
     '}'
