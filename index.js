@@ -28,8 +28,7 @@ module.exports.pitch = function (remainingRequest) {
     '    require.ensure([], function (require) {\n',
     '      resolve(require(', JSON.stringify('!!' + remainingRequest), '));\n',
     '    }' + (bundleName && (', ' + JSON.stringify(bundleName))) + ');\n',
-    '    var script = document.head.lastElementChild;',
-    '    script.onerror = reject',
+    '    document.head.lastChild.onerror = reject;',
     '  });\n',
     '}'
   ];
