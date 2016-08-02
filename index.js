@@ -24,10 +24,11 @@ module.exports.pitch = function (remainingRequest) {
   var result = [
     (promiseLib !== 'global') ? 'var Promise = require(' + JSON.stringify(promiseLib) + ');\n' : '',
     'module.exports = function () {\n',
-    '  return new Promise(function (resolve) {\n',
+    '  return new Promise(function (resolve, reject) {\n',
     '    require.ensure([], function (require) {\n',
     '      resolve(require(', JSON.stringify('!!' + remainingRequest), '));\n',
     '    }' + (bundleName && (', ' + JSON.stringify(bundleName))) + ');\n',
+    '    document.head.lastChild.onerror = reject;',
     '  });\n',
     '}'
   ];
